@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KnowEmpire Seller Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-dark: #5b21b6;
+      --background: #f8f6ff;
+      --white: #fff;
+      --text: #2d1a4a;
+      --muted: #a78bfa;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: 0 2px 16px #7c3aed22;
+      padding: 28px 5vw 24px 5vw;
+      margin-top: 24px;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 14px;
+      color: var(--primary-dark);
+      text-align: center;
+      letter-spacing: -1px;
+    }
+    .subtext {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 28px;
+      text-align: center;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid var(--muted);
+      margin: 28px 0;
+    }
+    .explainer {
+      font-size: 1rem;
+      margin-bottom: 28px;
+      color: var(--text);
+      text-align: center;
+    }
+    .cta-btn {
+      width: 100%;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      padding: 15px 0;
+      margin-bottom: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .cta-btn:active {
+      background: var(--primary-dark);
+    }
+    .addon {
+      text-align: center;
+      margin-bottom: 28px;
+      font-size: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .addon a, .addon button {
+      color: var(--primary-dark);
+      font-weight: bold;
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      padding: 0 8px;
+    }
+    .addon button {
+      color: var(--white);
+      background: var(--primary);
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 7px 16px;
+      border: none;
+      margin-left: 0;
+      transition: background 0.2s;
+    }
+    .addon button:active {
+      background: var(--primary-dark);
+    }
+    .footer {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 18px;
+    }
+    /* Modal styles */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(124,58,237,0.10);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-bg.active { display: flex; }
+    .form-container {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 2px 16px #7c3aed33;
+      padding: 24px 6vw 18px 6vw;
+      max-width: 95vw;
+      width: 400px;
+      position: relative;
+      margin: 0 2vw;
+    }
+    .close-btn {
+      position: absolute;
+      right: 16px;
+      top: 12px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--primary-dark);
+      cursor: pointer;
+    }
+    h2 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: var(--primary-dark);
+      text-align: center;
+    }
+    label {
+      font-size: 1rem;
+      color: var(--primary-dark);
+      margin-bottom: 5px;
+      display: block;
+      font-weight: 500;
+    }
+    .input, select, textarea {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid var(--muted);
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 16px;
+      background: var(--background);
+      color: var(--text);
+      box-sizing: border-box;
+    }
+    .input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--primary);
+      border-color: var(--primary);
+    }
+    .radio-group {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      color: var(--text);
+      background: var(--background);
+      border-radius: 6px;
+      padding: 4px 10px;
+      border: 1px solid var(--muted);
+      cursor: pointer;
+      font-size: 0.98rem;
+    }
+    .radio-group input[type="radio"] {
+      margin-right: 6px;
+      accent-color: var(--primary);
+    }
+    .checkbox-row {
+      margin-bottom: 20px;
+      font-size: 0.98rem;
+      color: var(--text);
+    }
+    .checkbox-row input[type="checkbox"] {
+      accent-color: var(--primary);
+      margin-right: 6px;
+    }
+    .register-btn {
+      width: 100%;
+      background: var(--primary-dark);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 1.08rem;
+      font-weight: bold;
+      padding: 13px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .register-btn:active {
+      background: var(--primary);
+    }
+    /* Seller Dashboard */
+    .dashboard {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 32px 0 0 0;
+    }
+    .dashboard h2 {
+      color: var(--primary-dark);
+      margin-bottom: 18px;
+    }
+    /* Post Section */
+    .post-section {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 0 4vw 90px 4vw;
+      display: none;
+    }
+    .post-form {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px #7c3aed22;
+      padding: 18px 14px 14px 14px;
+      margin-bottom: 22px;
+    }
+    .post-form label {
+      font-size: 1rem;
+      color: #5b21b6;
+      margin-bottom: 5px;
+      display: block;
+      font-weight: 500;
+    }
+    .post-form input, .post-form textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #a78bfa;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      background: #f8f6ff;
+      color: #222;
+      box-sizing: border-box;
+    }
+    .post-form button {
+      width: 100%;
+      background: #7c3aed;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.08rem;
+      font-weight: bold;
+      padding: 12px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .post-form button:active {
+      background: #5b21b6;
+    }
+    .product-list {
+      margin-top: 10px;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 1px 8px #7c3aed11;
+      padding: 14px 12px 10px 12px;
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      position: relative;
+    }
+    .product-title {
+      font-weight: bold;
+      color: #5b21b6;
+      font-size: 1.08rem;
+    }
+    .product-desc {
+      font-size: 0.98rem;
+      margin: 2px 0 6px 0;
+      color: #444;
+    }
+    .product-meta {
+      font-size: 0.97rem;
+      color: #7c3aed;
+      margin-bottom: 4px;
+    }
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .delete-btn:active {
+      color: #b91c1c;
+    }
+    /* Bottom nav */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100vw;
+      background: transparent;
+      border-top: none;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 0 8px 0;
+      z-index: 100;
+      height: 70px;
+    }
+    .nav-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      color: #444;
+      font-size: 1rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: color 0.2s;
+      height: 100%;
+      justify-content: center;
+      border-radius: 0;
+    }
+    .nav-btn .material-icons {
+      font-size: 2rem;
+      margin-bottom: 2px;
+      color: #444;
+      transition: color 0.2s;
+    }
+    .nav-btn span.label {
+      font-size: 0.92rem;
+      margin-top: 2px;
+      color: #444;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      transition: color 0.2s, font-weight 0.2s;
+    }
+    .nav-btn.active .material-icons,
+    .nav-btn:active .material-icons {
+      color: #111;
+    }
+    .nav-btn.active span.label,
+    .nav-btn:active span.label {
+      color: #111;
+      font-weight: 700;
+    }
+    .nav-btn:focus {
+      outline: none;
+    }
+    /* Hide all dashboard sections by default */
+    .dashboard-section {
+      display: none;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 32px 0 90px 0;
+    }
+    .dashboard-section.active {
+      display: block;
+    }
+    .fab {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      box-shadow: 0 2px 8px #7c3aed44;
+      font-size: 2.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 200;
+      transition: background 0.2s;
+    }
+    .fab:active {
+      background: var(--primary-dark);
+    }
+    .modal-form-bg {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(44, 19, 100, 0.12);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-form-bg.active { display: flex; }
+    .modal-form {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 2px 16px #7c3aed33;
+      padding: 22px 6vw 18px 6vw;
+      max-width: 95vw;
+      width: 400px;
+      position: relative;
+      margin: 0 2vw;
+      animation: fadeIn 0.2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .modal-form .close-btn {
+      position: absolute;
+      right: 16px;
+      top: 12px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--primary-dark);
+      cursor: pointer;
+    }
+    .image-preview {
+      width: 100%;
+      max-height: 180px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      background: #f8f6ff;
+      display: none;
+    }
+    .product-image {
+      width: 100%;
+      height: auto;
+      max-height: 320px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      background: #f8f6ff;
+      display: block;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .container, .form-container, .dashboard, .post-section, .dashboard-section {
+        padding: 12px 2vw 12px 2vw;
+        border-radius: 12px;
+      }
+      h1 { font-size: 1.3rem; }
+      h2 { font-size: 1.05rem; }
+    }
+    .menu-item {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 1.07rem;
+      color: #2d1a4a;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.18s, box-shadow 0.18s;
+      box-shadow: 0 1px 6px #7c3aed11;
+    }
+    .menu-item:active {
+      background: #f3e8ff;
+    }
+    /* Dark mode support */
+    body.dark-theme {
+      background: #181028;
+      color: #f3e8ff;
+    }
+    body.dark-theme .container,
+    body.dark-theme .form-container,
+    body.dark-theme .dashboard,
+    body.dark-theme .post-section,
+    body.dark-theme .dashboard-section,
+    body.dark-theme .modal-form,
+    body.dark-theme #product-modal {
+      background: #241a3a !important;
+      color: #f3e8ff !important;
+    }
+    body.dark-theme .menu-item {
+      background: #2d1a4a !important;
+      color: #f3e8ff !important;
+      border-color: #3b2c5a !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Landing Page Content -->
+  <div class="container" id="landing-content">
+    <h1>The First P2P Marketplace Built on Farcaster</h1>
+    <div class="subtext">
+      Trade goods or services. Earn trustlessly. Powered by $KNOW & escrow.
+    </div>
+    <hr>
+    <div class="explainer">
+      <div>KnowEmpire connects buyers and sellers through a secure crypto-native experience.</div>
+      <div>Whether you're selling physical products, offering services, or just referring others — you earn through our trustless system.</div>
+    </div>
+    <hr>
+    <!-- Call to Action -->
+    <button class="cta-btn" id="waitlist-btn">Join the Waitlist</button>
+    <div id="waitlist-success" style="display:none; text-align:center; color:var(--primary-dark); font-weight:bold; margin-bottom:18px;">
+      🎉 You’ve joined the waitlist!
+    </div>
+    <!-- Add-on below CTA -->
+    <div class="addon">
+      <span>Already a seller or service provider?</span>
+      <a id="open-registration">Register to Sell</a>
+      <button id="register-buyer" type="button">Register as Buyer</button>
+    </div>
+    <div class="footer">
+      $KNOW token live • Escrow powered • Built for the Farcaster community.
+    </div>
+  </div>
+
+  <!-- Seller Registration Modal -->
+  <div class="modal-bg" id="registration-modal">
+    <div class="form-container">
+      <button class="close-btn" id="close-registration" title="Close">&times;</button>
+      <h2>🧾 Become a Seller</h2>
+      <form id="seller-form">
+        <label for="email">Email Address</label>
+        <input class="input" type="email" id="email" name="email" placeholder="your@email.com" required>
+        <label>What do you want to sell?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="category" value="physical" required> Physical</label>
+          <label><input type="radio" name="category" value="digital"> Digital</label>
+          <label><input type="radio" name="category" value="services"> Services</label>
+        </div>
+        <label for="description">Describe your offer (1–2 sentences):</label>
+        <textarea id="description" name="description" rows="3" placeholder="Describe what you offer..." required></textarea>
+        <label for="portfolio">Portfolio or Sample Link</label>
+        <input class="input" type="url" id="portfolio" name="portfolio" placeholder="https://">
+        <label for="location">Where are you based?</label>
+        <select id="location" name="location" required>
+          <option value="">Select region</option>
+          <option value="africa">Africa</option>
+          <option value="europe">Europe</option>
+          <option value="asia">Asia</option>
+          <option value="north-america">North America</option>
+          <option value="south-america">South America</option>
+          <option value="australia">Australia</option>
+          <option value="antarctica">Antarctica</option>
+        </select>
+        <div class="checkbox-row">
+          <label>
+            <input type="checkbox" name="agreement" required>
+            I agree to deliver what I promise. I understand escrow protects both buyer and seller.
+          </label>
+        </div>
+        <button class="register-btn" type="submit">Register as Seller</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Buyer Registration Modal -->
+  <div class="modal-bg" id="buyer-modal">
+    <div class="form-container">
+      <button class="close-btn" id="close-buyer" title="Close">&times;</button>
+      <h2>🛒 Register as Buyer</h2>
+      <form id="buyer-form">
+        <label for="buyer-email">Email Address</label>
+        <input class="input" type="email" id="buyer-email" name="buyer-email" placeholder="your@email.com" required>
+        <button class="register-btn" type="submit" style="margin-top:10px;">Register as Buyer</button>
+        <div id="buyer-success" style="display:none; text-align:center; color:var(--primary-dark); font-weight:bold; margin-top:14px;">
+          🎉 You’re registered as a buyer!
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Seller Dashboard (hidden by default) -->
+  <div class="dashboard" id="seller-dashboard" style="display:none;">
+    <h2>Welcome, Seller!</h2>
+    <div style="margin-bottom:18px; color:var(--primary);">What would you like to do?</div>
+    <div style="font-size:1.1rem; color:var(--muted); margin-bottom:30px;">
+      Use the buttons below to manage your offers, profile, and more.
+    </div>
+  </div>
+
+  <!-- Dashboard Sections -->
+  <div class="post-section dashboard-section" id="section-post">
+    <!-- Floating Action Button for Add Product -->
+    <button class="fab" id="open-post-form" title="Add Product">
+      <span class="material-icons">add</span>
+    </button>
+    <!-- Product List -->
+    <div class="product-list" id="product-list">
+      <!-- Products will appear here -->
+    </div>
+  </div>
+  <div class="dashboard-section" id="section-profile">
+    <h2>Profile</h2>
+    <div style="color:var(--muted);">Your profile info and stats will appear here.</div>
+  </div>
+  <div class="dashboard-section" id="section-leaderboard">
+    <h2>Leaderboard</h2>
+    <div style="color:var(--muted);">Leaderboard coming soon!</div>
+  </div>
+  <div class="dashboard-section" id="section-referral">
+    <h2>Referral</h2>
+    <div style="color:var(--muted);">Referral program coming soon!</div>
+  </div>
+  <div class="dashboard-section" id="section-menu">
+    <h2>Menu</h2>
+    <div class="menu-list" style="display: flex; flex-direction: column; gap: 18px; margin-top: 18px;">
+      <button class="menu-item" id="change-email-btn">
+        <span class="material-icons" style="vertical-align:middle;">mail</span>
+        <span style="margin-left:10px;">Change Email</span>
+      </button>
+      <button class="menu-item" id="change-password-btn">
+        <span class="material-icons" style="vertical-align:middle;">lock</span>
+        <span style="margin-left:10px;">Change Password</span>
+      </button>
+      <button class="menu-item" id="theme-toggle">
+        <span class="material-icons" style="vertical-align:middle;">brightness_6</span>
+        <span style="margin-left:10px;">Switch Theme</span>
+      </button>
+      <button class="menu-item" id="support-btn">
+        <span class="material-icons" style="vertical-align:middle;">support_agent</span>
+        <span style="margin-left:10px;">Support</span>
+      </button>
+      <button class="menu-item" id="logout-btn">
+        <span class="material-icons" style="vertical-align:middle;">logout</span>
+        <span style="margin-left:10px;">Logout</span>
+      </button>
+      <div style="text-align:center; color:#aaa; font-size:0.95rem; margin-top:10px;">
+        App version 1.0.0
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Post Product Form -->
+  <div class="modal-form-bg" id="post-form-modal">
+    <div class="modal-form">
+      <button class="close-btn" id="close-post-form" title="Close">&times;</button>
+      <form id="product-form">
+        <label for="product-image">Image</label>
+        <input type="file" id="product-image" accept="image/*" style="margin-bottom:10px;">
+        <img id="image-preview" class="image-preview" alt="Preview">
+        <label for="product-name">Product Name</label>
+        <input id="product-name" required maxlength="40" placeholder="e.g. Handmade Wallet">
+        <label for="product-desc">Description</label>
+        <textarea id="product-desc" rows="2" required maxlength="120" placeholder="Short description"></textarea>
+        <label for="product-price">Price ($KNOW)</label>
+        <input id="product-price" type="number" min="1" required placeholder="e.g. 50">
+        <button type="submit" class="register-btn" style="margin-top:10px;">Post Product</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation (hidden until dashboard) -->
+  <div class="bottom-nav" id="bottom-nav" style="display:none;">
+    <button class="nav-btn active" id="nav-post">
+      <span class="material-icons">add_box</span>
+      <span class="label">Post</span>
+    </button>
+    <button class="nav-btn" id="nav-profile">
+      <span class="material-icons">person</span>
+      <span class="label">Profile</span>
+    </button>
+    <button class="nav-btn" id="nav-leaderboard">
+      <span class="material-icons">emoji_events</span>
+      <span class="label">Leaderboard</span>
+    </button>
+    <button class="nav-btn" id="nav-referral">
+      <span class="material-icons">share</span>
+      <span class="label">Referral</span>
+    </button>
+    <button class="nav-btn" id="nav-menu">
+      <span class="material-icons">menu</span>
+      <span class="label">Menu</span>
+    </button>
+  </div>
+  <script>
+    // Modal open/close logic
+    const openBtn = document.getElementById('open-registration');
+    const modal = document.getElementById('registration-modal');
+    const closeBtn = document.getElementById('close-registration');
+    openBtn.onclick = () => { modal.classList.add('active'); };
+    closeBtn.onclick = () => { modal.classList.remove('active'); };
+    window.onclick = (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+      if (e.target === buyerModal) buyerModal.classList.remove('active');
+    };
+
+    // Waitlist success message logic
+    const waitlistBtn = document.getElementById('waitlist-btn');
+    const waitlistSuccess = document.getElementById('waitlist-success');
+    waitlistBtn.onclick = function() {
+      waitlistBtn.style.display = 'none';
+      waitlistSuccess.style.display = 'block';
+    };
+
+    // Buyer modal logic
+    const buyerBtn = document.getElementById('register-buyer');
+    const buyerModal = document.getElementById('buyer-modal');
+    const closeBuyerBtn = document.getElementById('close-buyer');
+    const buyerForm = document.getElementById('buyer-form');
+    const buyerSuccess = document.getElementById('buyer-success');
+    buyerBtn.onclick = function() {
+      buyerModal.classList.add('active');
+    };
+    closeBuyerBtn.onclick = function() {
+      buyerModal.classList.remove('active');
+      buyerForm.reset();
+      buyerSuccess.style.display = 'none';
+      buyerForm.querySelector('button[type="submit"]').style.display = '';
+    };
+    buyerForm.onsubmit = function(e) {
+      e.preventDefault();
+      buyerForm.querySelector('button[type="submit"]').style.display = 'none';
+      buyerSuccess.style.display = 'block';
+    };
+
+    // Seller registration logic
+    const sellerForm = document.getElementById('seller-form');
+    const landingContent = document.getElementById('landing-content');
+    const sellerDashboard = document.getElementById('seller-dashboard');
+    const bottomNav = document.getElementById('bottom-nav');
+    const dashboardSections = document.querySelectorAll('.dashboard-section');
+    sellerForm.onsubmit = function(e) {
+      e.preventDefault();
+      modal.classList.remove('active');
+      landingContent.style.display = 'none';
+      sellerDashboard.style.display = 'block';
+      bottomNav.style.display = 'flex';
+      showSection('post');
+    };
+
+    // Bottom nav logic
+    const navBtns = document.querySelectorAll('.nav-btn');
+    function showSection(section) {
+      dashboardSections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById('section-' + section).classList.add('active');
+      navBtns.forEach(b => b.classList.remove('active'));
+      document.getElementById('nav-' + section).classList.add('active');
+      sellerDashboard.style.display = 'none';
+    }
+    navBtns.forEach(btn => {
+      btn.onclick = function() {
+        navBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const section = btn.id.replace('nav-', '');
+        showSection(section);
+      };
+    });
+
+    // Show/hide Post Product modal form
+    const openPostFormBtn = document.getElementById('open-post-form');
+    const postFormModal = document.getElementById('post-form-modal');
+    const closePostFormBtn = document.getElementById('close-post-form');
+    const productForm = document.getElementById('product-form');
+    const imageInput = document.getElementById('product-image');
+    const imagePreview = document.getElementById('image-preview');
+
+    openPostFormBtn.onclick = function() {
+      postFormModal.classList.add('active');
+    };
+    closePostFormBtn.onclick = function() {
+      postFormModal.classList.remove('active');
+      productForm.reset();
+      imagePreview.style.display = 'none';
+      imagePreview.src = '';
+    };
+    postFormModal.onclick = function(e) {
+      if (e.target === postFormModal) {
+        postFormModal.classList.remove('active');
+        productForm.reset();
+        imagePreview.style.display = 'none';
+        imagePreview.src = '';
+      }
+    };
+
+    // Image preview logic
+    imageInput.onchange = function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          imagePreview.src = evt.target.result;
+          imagePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        imagePreview.style.display = 'none';
+        imagePreview.src = '';
+      }
+    };
+
+    // Product posting logic (with image)
+    const list = document.getElementById('product-list');
+    let products = [];
+
+    function renderProducts() {
+      list.innerHTML = '';
+      products.forEach((p, i) => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          ${p.image ? `<img src="${p.image}" class="product-image" alt="Product Image">` : ''}
+          <div class="product-title">${p.name}</div>
+          <div class="product-desc">${p.desc}</div>
+          <div class="product-meta">${p.price} $KNOW</div>
+          <button class="delete-btn" title="Delete"><span class="material-icons">delete</span></button>
+        `;
+        card.querySelector('.delete-btn').onclick = () => {
+          products.splice(i, 1);
+          renderProducts();
+        };
+        list.appendChild(card);
+      });
+    }
+
+    productForm.onsubmit = function(e) {
+      e.preventDefault();
+      const name = document.getElementById('product-name').value.trim();
+      const desc = document.getElementById('product-desc').value.trim();
+      const price = document.getElementById('product-price').value.trim();
+      const image = imagePreview.src && imagePreview.style.display !== 'none' ? imagePreview.src : '';
+      if (name && desc && price) {
+        products.unshift({ name, desc, price, image });
+        renderProducts();
+        productForm.reset();
+        imagePreview.style.display = 'none';
+        imagePreview.src = '';
+        postFormModal.classList.remove('active');
+      }
+    };
+
+    // Show Post section by default after seller registers
+    function showSection(section) {
+      dashboardSections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById('section-' + section).classList.add('active');
+      navBtns.forEach(b => b.classList.remove('active'));
+      document.getElementById('nav-' + section).classList.add('active');
+      sellerDashboard.style.display = 'none';
+    }
+
+    // Menu items logic
+    const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+      item.onclick = function() {
+        const action = this.getAttribute('data-action');
+        if (action === 'change-email') {
+          const newEmail = prompt('Enter your new email address:');
+          if (newEmail && /\S+@\S+\.\S+/.test(newEmail)) {
+            alert('Email changed to: ' + newEmail + ' (demo only)');
+            // Here you would send newEmail to your backend
+          } else if (newEmail) {
+            alert('Invalid email address.');
+          }
+        } else if (action === 'change-password') {
+          const newPass = prompt('Enter your new password:');
+          if (newPass && newPass.length >= 6) {
+            alert('Password changed! (demo only)');
+            // Here you would send newPass to your backend
+          } else if (newPass) {
+            alert('Password must be at least 6 characters.');
+          }
+        } else if (action === 'switch-theme') {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        } else if (action === 'support') {
+          window.location.href = 'mailto:support@knowempire.com?subject=Support%20Request';
+        } else if (action === 'logout') {
+          // For demo: reloads the page. In production, clear auth/session.
+          alert('Logging out...');
+          window.location.reload();
+        }
+      };
+    });
+
+    // Dark mode toggle
+    document.getElementById('theme-toggle').onclick = function() {
+      document.body.classList.toggle('dark-theme');
+    };
+  </script>
+</body>
+</html>
