@@ -508,6 +508,398 @@
       color: #f3e8ff !important;
       border-color: #3b2c5a !important;
     }
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .category-tab {
+      background: none;
+      border: none;
+      font-size: 1.08rem;
+      font-weight: 600;
+      color: #5b21b6;
+      padding: 8px 22px;
+      border-radius: 22px;
+      transition: background 0.18s, color 0.18s;
+      cursor: pointer;
+    }
+    .category-tab.active {
+      background: #7c3aed;
+      color: #fff;
+    }
+    .product-list-stacked {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 10px;
+    }
+    .product-card-stacked {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px #7c3aed11;
+      padding: 14px 12px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      position: relative;
+    }
+    .product-card-stacked img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: #f8f6ff;
+      flex-shrink: 0;
+    }
+    .product-card-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .product-title {
+      font-weight: bold;
+      color: #2d1a4a;
+      font-size: 1.08rem;
+      margin-bottom: 2px;
+    }
+    .product-badges {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+    .badge {
+      font-size: 0.85rem;
+      background: #f3e8ff;
+      color: #7c3aed;
+      border-radius: 8px;
+      padding: 2px 10px;
+      font-weight: 600;
+    }
+    .badge.goods { background: #e0e7ff; color: #6366f1; }
+    .badge.digital { background: #fef9c3; color: #eab308; }
+    .badge.services { background: #f3e8ff; color: #7c3aed; }
+    .product-meta {
+      font-size: 1rem;
+      color: #5b21b6;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .product-location {
+      font-size: 0.97rem;
+      color: #888;
+      margin-left: 8px;
+      font-weight: 400;
+    }
+    .product-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .product-actions button {
+      flex: 1;
+      background: #7c3aed;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 7px 0;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .product-actions .delete-btn {
+      background: #fff;
+      color: #ef4444;
+      border: 1.5px solid #ef4444;
+      font-weight: 600;
+    }
+    @media (max-width: 600px) {
+      .product-card-stacked img { width: 54px; height: 54px; }
+    }
+    .referral-bg {
+      padding: 32px 12px 24px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: none;
+      min-height: unset;
+    }
+    .referral-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .referral-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 8px;
+    }
+    .referral-title {
+      font-size: 1.35rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .referral-balance-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      border: 3px solid #111;
+      border-radius: 18px;
+      padding: 12px 18px;
+      width: 100%;
+      max-width: 350px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+    .referral-balance {
+      color: #111;
+      font-family: monospace, monospace;
+      font-size: 1.3rem;
+      letter-spacing: 1px;
+    }
+    .referral-claim-btn {
+      background: #e5e5e5;
+      color: #aaa;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 7px 22px;
+      margin-left: 18px;
+      cursor: not-allowed;
+    }
+    .referral-desc {
+      font-size: 1.02rem;
+      color: #222;
+      text-align: center;
+      margin-bottom: 32px;
+      margin-top: 8px;
+    }
+    .referral-invite-btn {
+      width: 100%;
+      max-width: 350px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      padding: 15px 0;
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 8px #00000011;
+      transition: background 0.18s;
+    }
+    .referral-invite-btn:active {
+      background: #222;
+    }
+    @media (max-width: 600px) {
+      .referral-bg {
+        padding: 18px 4vw 90px 4vw;
+      }
+      .referral-balance-box, .referral-invite-btn {
+        max-width: 100%;
+      }
+    }
+    /* Profile Overlay */
+    .profile-overlay {
+      display: none;
+      position: fixed;
+      z-index: 3000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.10);
+      justify-content: center;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+    .profile-overlay.active {
+      display: flex;
+    }
+    .profile-card {
+      background: radial-gradient(circle at 50% 30%,   #e5e5e5 0%,  #e5e5e5 100%);
+      border-radius: 28px;
+      margin: 32px 8px 24px 8px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 4px 32px #0002;
+      position: relative;
+      padding: 0 0 32px 0;
+      overflow: hidden;
+    }
+    .profile-close {
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 1.7rem;
+      color: #222;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .profile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 38px 0 0 0;
+    }
+    .profile-avatar-bg {
+      background: #fff;
+      border-radius: 50%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    .profile-username {
+      font-size: 1.25rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .profile-wallet {
+      display: flex;
+      align-items: center;
+      background: #111;
+      color: #fff;
+      border-radius: 18px;
+      padding: 6px 18px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .profile-wallet-icon,
+    .profile-wallet-action {
+      font-size: 1.2em;
+    }
+    .profile-wallet-action {
+      margin-left: 8px;
+      cursor: pointer;
+    }
+    .profile-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 18px;
+    }
+    .profile-tab {
+      flex: 1;
+      background: none;
+      border: none;
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #111;
+      padding: 10px 0;
+      border-bottom: 3px solid transparent;
+      transition: border-color 0.18s, color 0.18s;
+      cursor: pointer;
+    }
+    .profile-tab.active {
+      border-bottom: 3px solid #f9c900;
+      color: #111;
+    }
+    .profile-assets-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #222;
+      text-align: left;
+      margin-left: 24px;
+      margin-bottom: 2px;
+    }
+    .profile-assets-sub {
+      font-size: 0.98rem;
+      color: #444;
+      margin-left: 24px;
+      margin-bottom: 14px;
+    }
+    .profile-assets-row {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin: 0 14px;
+    }
+    .profile-asset-card {
+      background: #fff;
+      border-radius: 18px;
+      border: 2.5px solid #111;
+      flex: 1;
+      min-width: 0;
+      padding: 18px 10px 12px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 8px #0001;
+    }
+    .profile-asset-icon {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 8px;
+    }
+    .profile-asset-label {
+      font-size: 1.02rem;
+      color: #222;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+    .profile-asset-value {
+      font-size: 1.18rem;
+      font-family: monospace, monospace;
+      color: #111;
+      font-weight: bold;
+    }
+    @media (max-width: 600px) {
+      .profile-card {
+        margin: 18px 2vw 18px 2vw;
+        border-radius: 18px;
+        padding-bottom: 18px;
+      }
+      .profile-assets-row {
+        gap: 8px;
+        margin: 0 2vw;
+      }
+      .profile-asset-card {
+        padding: 12px 4px 10px 4px;
+        border-radius: 12px;
+      }
+    }
+    .connect-wallet-btn {
+      background: #7c3aed;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.08rem;
+      font-weight: bold;
+      padding: 10px 22px;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .connect-wallet-btn:active {
+      background: #5b21b6;
+    }
   </style>
 </head>
 <body>
@@ -606,26 +998,78 @@
 
   <!-- Dashboard Sections -->
   <div class="post-section dashboard-section" id="section-post">
+    <!-- Category Tabs -->
+    <div class="category-tabs" id="category-tabs">
+      <button class="category-tab active" data-category="goods">Goods</button>
+      <button class="category-tab" data-category="services">Services</button>
+      <button class="category-tab" data-category="digital">Digital</button>
+    </div>
     <!-- Floating Action Button for Add Product -->
     <button class="fab" id="open-post-form" title="Add Product">
       <span class="material-icons">add</span>
     </button>
     <!-- Product List -->
-    <div class="product-list" id="product-list">
+    <div class="product-list-stacked" id="product-list">
       <!-- Products will appear here -->
     </div>
   </div>
   <div class="dashboard-section" id="section-profile">
-    <h2>Profile</h2>
-    <div style="color:var(--muted);">Your profile info and stats will appear here.</div>
+    <div class="profile-card">
+      <div class="profile-header">
+        <div class="profile-avatar-bg">
+          <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=anon" alt="Avatar" class="profile-avatar" id="profile-avatar">
+        </div>
+        <div class="profile-username" id="profile-username">@anonymous</div>
+        <div class="profile-wallet" id="profile-wallet" style="display:none;">
+          <span class="profile-wallet-icon material-icons">account_balance_wallet</span>
+          <span class="profile-wallet-text" id="wallet-address">UQC••••DEC</span>
+          <span class="profile-wallet-action material-icons" id="disconnect-wallet" title="Disconnect">logout</span>
+        </div>
+        <button class="connect-wallet-btn" id="connect-wallet-btn">Connect Farcaster Wallet</button>
+      </div>
+      <div class="profile-tabs">
+        <button class="profile-tab active">POINTS</button>
+        <button class="profile-tab">REWARDS</button>
+      </div>
+      <div class="profile-assets-title">Virtual assets</div>
+      <div class="profile-assets-sub">Trade for VT</div>
+      <div class="profile-assets-row">
+        <div class="profile-asset-card">
+          <img src="https://api.iconify.design/ph:egg.svg?color=%23000" class="profile-asset-icon" alt="Egg">
+          <div class="profile-asset-label">Vooi Tons</div>
+          <div class="profile-asset-value">504,174.32</div>
+        </div>
+        <div class="profile-asset-card">
+          <img src="https://api.iconify.design/ph:currency-circle-dollar.svg?color=%23000" class="profile-asset-icon" alt="USD">
+          <div class="profile-asset-label">Virtual USD</div>
+          <div class="profile-asset-value">$802,325.14</div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="dashboard-section" id="section-leaderboard">
     <h2>Leaderboard</h2>
     <div style="color:var(--muted);">Leaderboard coming soon!</div>
   </div>
+  <!-- Referral Section -->
   <div class="dashboard-section" id="section-referral">
-    <h2>Referral</h2>
-    <div style="color:var(--muted);">Referral program coming soon!</div>
+    <div class="referral-bg">
+      <div class="referral-header">
+        <img src="https://api.iconify.design/ph:alien-bold.svg?color=%23000" alt="Invite" class="referral-icon">
+        <div class="referral-title">INVITE FRENS</div>
+      </div>
+      <div class="referral-balance-box">
+        <span class="referral-balance">0 VT</span>
+        <button class="referral-claim-btn" disabled>CLAIM</button>
+      </div>
+      <div class="referral-desc">
+        Score 5% from your buddies’ earned tokens + 1.25% from their referrals.
+      </div>
+      <button class="referral-invite-btn">
+        <span class="material-icons" style="font-size:1.2em;vertical-align:middle;">card_giftcard</span>
+        <span style="margin-left:8px;">INVITE A FREN</span>
+      </button>
+    </div>
   </div>
   <div class="dashboard-section" id="section-menu">
     <h2>Menu</h2>
@@ -670,6 +1114,15 @@
         <textarea id="product-desc" rows="2" required maxlength="120" placeholder="Short description"></textarea>
         <label for="product-price">Price ($KNOW)</label>
         <input id="product-price" type="number" min="1" required placeholder="e.g. 50">
+        <label for="product-category">Category</label>
+        <select id="product-category" required>
+          <option value="">Select category</option>
+          <option value="goods">Goods</option>
+          <option value="services">Services</option>
+          <option value="digital">Digital</option>
+        </select>
+        <label for="product-location">Location</label>
+        <input id="product-location" required maxlength="40" placeholder="e.g. New York, NY">
         <button type="submit" class="register-btn" style="margin-top:10px;">Post Product</button>
       </form>
     </div>
@@ -698,6 +1151,44 @@
       <span class="label">Menu</span>
     </button>
   </div>
+
+  <!-- Profile Overlay Section -->
+  <div id="profile-overlay" class="profile-overlay">
+    <div class="profile-card">
+      <!-- <button class="profile-close" id="close-profile">&times;</button> -->
+      <div class="profile-header">
+        <div class="profile-avatar-bg">
+          <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=remarkablesam" alt="Avatar" class="profile-avatar" id="profile-avatar">
+        </div>
+        <div class="profile-username" id="profile-username">@anonymous</div>
+        <div class="profile-wallet" id="profile-wallet" style="display:none;">
+          <span class="profile-wallet-icon material-icons">account_balance_wallet</span>
+          <span class="profile-wallet-text" id="wallet-address">UQC••••DEC</span>
+          <span class="profile-wallet-action material-icons" id="disconnect-wallet" title="Disconnect">logout</span>
+        </div>
+        <button class="connect-wallet-btn" id="connect-wallet-btn">Connect Farcaster Wallet</button>
+      </div>
+      <div class="profile-tabs">
+        <button class="profile-tab active">POINTS</button>
+        <button class="profile-tab">REWARDS</button>
+      </div>
+      <div class="profile-assets-title">Virtual assets</div>
+      <div class="profile-assets-sub">Trade for VT</div>
+      <div class="profile-assets-row">
+        <div class="profile-asset-card">
+          <img src="https://api.iconify.design/ph:egg.svg?color=%23000" class="profile-asset-icon" alt="Egg">
+          <div class="profile-asset-label">Know point</div>
+          <div class="profile-asset-value">504,174.32</div>
+        </div>
+        <div class="profile-asset-card">
+          <img src="https://api.iconify.design/ph:currency-circle-dollar.svg?color=%23000" class="profile-asset-icon" alt="USD">
+          <div class="profile-asset-label">Virtual USD</div>
+          <div class="profile-asset-value">$802,325.14</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Modal open/close logic
     const openBtn = document.getElementById('open-registration');
@@ -744,7 +1235,6 @@
     const landingContent = document.getElementById('landing-content');
     const sellerDashboard = document.getElementById('seller-dashboard');
     const bottomNav = document.getElementById('bottom-nav');
-    const dashboardSections = document.querySelectorAll('.dashboard-section');
     sellerForm.onsubmit = function(e) {
       e.preventDefault();
       modal.classList.remove('active');
@@ -756,19 +1246,16 @@
 
     // Bottom nav logic
     const navBtns = document.querySelectorAll('.nav-btn');
-    function showSection(section) {
-      dashboardSections.forEach(sec => sec.classList.remove('active'));
-      document.getElementById('section-' + section).classList.add('active');
-      navBtns.forEach(b => b.classList.remove('active'));
-      document.getElementById('nav-' + section).classList.add('active');
-      sellerDashboard.style.display = 'none';
-    }
+    const dashboardSections = document.querySelectorAll('.dashboard-section');
+
     navBtns.forEach(btn => {
       btn.onclick = function() {
         navBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const section = btn.id.replace('nav-', '');
-        showSection(section);
+        dashboardSections.forEach(sec => sec.classList.remove('active'));
+        const secEl = document.getElementById('section-' + section);
+        if (secEl) secEl.classList.add('active');
       };
     });
 
@@ -814,38 +1301,31 @@
       }
     };
 
-    // Product posting logic (with image)
-    const list = document.getElementById('product-list');
-    let products = [];
+    let products = []; // {name, desc, price, image, category, location}
 
-    function renderProducts() {
-      list.innerHTML = '';
-      products.forEach((p, i) => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-          ${p.image ? `<img src="${p.image}" class="product-image" alt="Product Image">` : ''}
-          <div class="product-title">${p.name}</div>
-          <div class="product-desc">${p.desc}</div>
-          <div class="product-meta">${p.price} $KNOW</div>
-          <button class="delete-btn" title="Delete"><span class="material-icons">delete</span></button>
-        `;
-        card.querySelector('.delete-btn').onclick = () => {
-          products.splice(i, 1);
-          renderProducts();
-        };
-        list.appendChild(card);
-      });
-    }
+    // Category tab logic
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    let currentCategory = 'goods';
+    categoryTabs.forEach(tab => {
+      tab.onclick = function() {
+        categoryTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentCategory = tab.getAttribute('data-category');
+        renderProducts();
+      };
+    });
 
+    // Product posting logic (with category and image as base64)
     productForm.onsubmit = function(e) {
       e.preventDefault();
       const name = document.getElementById('product-name').value.trim();
       const desc = document.getElementById('product-desc').value.trim();
       const price = document.getElementById('product-price').value.trim();
+      const category = document.getElementById('product-category').value;
+      const location = document.getElementById('product-location').value.trim();
       const image = imagePreview.src && imagePreview.style.display !== 'none' ? imagePreview.src : '';
-      if (name && desc && price) {
-        products.unshift({ name, desc, price, image });
+      if (name && desc && price && category && location) {
+        products.unshift({ name, desc, price, image, category, location });
         renderProducts();
         productForm.reset();
         imagePreview.style.display = 'none';
@@ -853,6 +1333,47 @@
         postFormModal.classList.remove('active');
       }
     };
+
+    // Render products in stacked card style, filtered by category
+    function renderProducts() {
+      const list = document.getElementById('product-list');
+      list.innerHTML = '';
+      products
+        .filter(p => p.category === currentCategory)
+        .forEach((p, i) => {
+          const card = document.createElement('div');
+          card.className = 'product-card-stacked';
+          card.innerHTML = `
+            <img src="${p.image || ''}" alt="Product Image">
+            <div class="product-card-info">
+              <div class="product-title">${p.name}</div>
+              <div class="product-badges">
+                <span class="badge ${p.category}">${capitalize(p.category)}</span>
+              </div>
+              <div class="product-meta">$${p.price} <span class="product-location">${p.location}</span></div>
+              <div class="product-actions">
+                <button class="edit-btn" style="background:#7c3aed;color:#fff;">Edit</button>
+                <button class="delete-btn" style="background:#fff;color:#ef4444;border:1.5px solid #ef4444;">Delete</button>
+              </div>
+            </div>
+          `;
+          // Edit button (optional: implement edit logic)
+          card.querySelector('.edit-btn').onclick = (e) => {
+            e.stopPropagation();
+            alert('Edit feature coming soon!');
+          };
+          // Delete button
+          card.querySelector('.delete-btn').onclick = (e) => {
+            e.stopPropagation();
+            products.splice(products.indexOf(p), 1);
+            renderProducts();
+          };
+          list.appendChild(card);
+        });
+    }
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
 
     // Show Post section by default after seller registers
     function showSection(section) {
@@ -901,6 +1422,79 @@
     document.getElementById('theme-toggle').onclick = function() {
       document.body.classList.toggle('dark-theme');
     };
+
+    // Profile overlay logic
+    const profileOverlay = document.getElementById('profile-overlay');
+    // const closeProfileBtn = document.getElementById('close-profile');
+    const walletAction = document.querySelector('.profile-wallet-action');
+
+    walletAction.onclick = function() {
+      // For demo: toggle profile overlay
+      const isOpen = profileOverlay.classList.contains('active');
+      profileOverlay.classList.toggle('active', !isOpen);
+      if (!isOpen) {
+        // Close any open modals
+        modal.classList.remove('active');
+        buyerModal.classList.remove('active');
+        postFormModal.classList.remove('active');
+      }
+    };
+
+    closeProfileBtn.onclick = function() {
+      profileOverlay.classList.remove('active');
+    };
+
+    // Close profile overlay when clicking outside of it
+    window.onclick = function(event) {
+      if (event.target === profileOverlay) {
+        profileOverlay.classList.remove('active');
+      }
+    };
+
+    // Show profile overlay when Profile tab is clicked
+    document.getElementById('nav-profile').onclick = function() {
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById('profile-overlay').classList.add('active');
+    };
+    // Close profile overlay
+    document.getElementById('close-profile').onclick = function() {
+      document.getElementById('profile-overlay').classList.remove('active');
+      // Optionally, show the last active dashboard section again
+    };
+
+    // Simulate Farcaster wallet connection
+    document.getElementById('connect-wallet-btn').onclick = function() {
+      // Simulate getting user data from Farcaster
+      const farcasterId = '@remarkablesam';
+      const walletAddress = '0xUQC...DEC';
+      const avatarUrl = 'https://api.dicebear.com/7.x/pixel-art/svg?seed=remarkablesam';
+
+      document.getElementById('profile-username').textContent = farcasterId;
+      document.getElementById('wallet-address').textContent = walletAddress;
+      document.getElementById('profile-avatar').src = avatarUrl;
+
+      document.getElementById('profile-wallet').style.display = 'flex';
+      this.style.display = 'none';
+    };
+
+    document.getElementById('disconnect-wallet').onclick = function() {
+      document.getElementById('profile-username').textContent = '@anonymous';
+      document.getElementById('wallet-address').textContent = 'UQC••••DEC';
+      document.getElementById('profile-avatar').src = 'https://api.dicebear.com/7.x/pixel-art/svg?seed=anon';
+      document.getElementById('profile-wallet').style.display = 'none';
+      document.getElementById('connect-wallet-btn').style.display = 'inline-block';
+    };
+
+    // Hide profile overlay when any nav button except profile is clicked
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        if (btn.id !== 'nav-profile') {
+          document.getElementById('profile-overlay').classList.remove('active');
+        }
+      });
+    });
   </script>
 </body>
 </html>
