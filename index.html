@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>KnowEmpire Seller Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Google Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     :root {
@@ -312,7 +311,6 @@
       right: 10px;
       background: none;
       border: none;
-      color: #ef4444;
       font-size: 1.5rem;
       cursor: pointer;
       transition: color 0.2s;
@@ -535,7 +533,7 @@
       gap: 18px;
       margin-top: 10px;
     }
-    .product-card-stacked {
+    .product-card-stacked { /* Used for both seller's own products AND buyer's view */
       background: #fff;
       border-radius: 18px;
       box-shadow: 0 2px 16px #7c3aed11;
@@ -546,8 +544,8 @@
       position: relative;
     }
     .product-card-stacked img {
-      width: 70px;
-      height: 70px;
+      width: 80px; /* Adjusted for better visibility in buyer view */
+      height: 80px; /* Adjusted for better visibility in buyer view */
       object-fit: contain;
       border-radius: 12px;
       background: #f8f6ff;
@@ -597,6 +595,7 @@
       display: flex;
       gap: 10px;
       margin-top: 8px;
+      width: 100%;
     }
     .product-actions button {
       flex: 1;
@@ -610,14 +609,20 @@
       cursor: pointer;
       transition: background 0.18s;
     }
-    .product-actions .delete-btn {
+    .product-actions .delete-btn { /* Seller's delete button */
       background: #fff;
       color: #ef4444;
       border: 1.5px solid #ef4444;
       font-weight: 600;
     }
+    .product-actions .chat-seller-btn { /* Buyer's chat button */
+        background: #e0e7ff; /* Lighter background for chat */
+        color: #6366f1;
+        border: none;
+    }
     @media (max-width: 600px) {
       .product-card-stacked img { width: 54px; height: 54px; }
+      .product-actions { flex-direction: row; } /* Ensure buttons stay in a row on small screens */
     }
     .referral-bg {
       padding: 32px 12px 24px 12px;
@@ -728,7 +733,7 @@
       display: flex;
     }
     .profile-card {
-      background: radial-gradient(circle at 50% 30%,   #e5e5e5 0%,  #e5e5e5 100%);
+      background: radial-gradient(circle at 50% 30%,   #e5e5e5 0%,   #e5e5e5 100%);
       border-radius: 28px;
       margin: 32px 8px 24px 8px;
       width: 100%;
@@ -738,7 +743,8 @@
       padding: 0 0 32px 0;
       overflow: hidden;
     }
-    .profile-close {
+    .profile-close { /* Hidden by default, only shown if explicitly needed */
+      display: none; /* Hide the X button */
       position: absolute;
       right: 18px;
       top: 18px;
@@ -815,7 +821,7 @@
       padding: 10px 0;
       border-bottom: 3px solid transparent;
       transition: border-color 0.18s, color 0.18s;
-      cursor: pointer;
+      cursor: pointer
     }
     .profile-tab.active {
       border-bottom: 3px solid #f9c900;
@@ -900,10 +906,186 @@
     .connect-wallet-btn:active {
       background: #5b21b6;
     }
+    /* Styles for the new "Browse Products" section for buyers */
+    .buyer-product-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 0 4vw 90px 4vw; /* Adjusted padding to be consistent */
+    }
+    .buyer-product-card { /* Reusing product-card-stacked for consistency */
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 1px 8px #7c3aed11;
+        padding: 10px;
+        text-align: left;
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .buyer-product-card img {
+        width: 80px; /* Consistent with seller's list */
+        height: 80px; /* Consistent with seller's list */
+        object-fit: cover;
+        border-radius: 8px;
+        background: #f8f6ff;
+        flex-shrink: 0;
+    }
+    .buyer-product-card-content {
+        flex: 1;
+    }
+    .buyer-product-card .product-title {
+        font-size: 1.1rem;
+        margin-bottom: 2px;
+        color: #2d1a4a; /* Ensure good contrast */
+    }
+    .buyer-product-card .product-badges {
+        margin-bottom: 5px;
+        display: flex;
+        gap: 5px;
+    }
+    .buyer-product-card .badge {
+        font-size: 0.8rem;
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-weight: 500;
+    }
+    .buyer-product-card .product-meta {
+        font-size: 1rem;
+        color: #5b21b6;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    .buyer-product-card .product-location {
+        font-size: 0.9rem;
+        color: #888;
+        font-weight: 400;
+        margin-left: 5px;
+    }
+    .buyer-product-card .product-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 0; /* Already styled by parent actions */
+    }
+    .buyer-product-card .buy-now-btn,
+    .buyer-product-card .chat-seller-btn {
+        flex: 1;
+        padding: 8px 0;
+        font-size: 0.95rem;
+        font-weight: bold;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+    .buyer-product-card .buy-now-btn {
+        background: var(--primary);
+        color: var(--white);
+    }
+    .buyer-product-card .buy-now-btn:active {
+        background: var(--primary-dark);
+    }
+    .buyer-product-card .chat-seller-btn {
+        background: #e0e7ff;
+        color: #6366f1;
+    }
+    .buyer-product-card .chat-seller-btn:active {
+        background: #c5d0f5;
+    }
+    /* Product Detail Modal */
+    #product-detail-modal .modal-form {
+      max-width: 90vw;
+      width: 500px;
+      padding: 24px;
+    }
+    #product-detail-modal .product-detail-img {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: var(--background);
+      margin-bottom: 15px;
+    }
+    #product-detail-modal .product-detail-title {
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+    #product-detail-modal .product-detail-price {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    #product-detail-modal .product-detail-desc {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    #product-detail-modal .product-detail-meta {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    #product-detail-modal .buy-now-btn {
+      width: 100%;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      padding: 15px 0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #product-detail-modal .buy-now-btn:active {
+      background: var(--primary-dark);
+    }
+
+    /* Top bar for sections */
+    .section-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 4vw;
+      height: 60px;
+      background: var(--white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      max-width: 420px;
+      margin: 0 auto;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+    }
+    .section-top-bar .back-arrow {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--primary-dark);
+      margin-right: 15px;
+      cursor: pointer;
+      display: none; /* Hidden by default, enable if needed */
+    }
+    .section-top-bar .title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+      flex-grow: 1;
+      text-align: center;
+    }
+    body.dark-theme .section-top-bar {
+      background: #241a3a !important;
+      box-shadow: 0 1px 4px rgba(255,255,255,0.05);
+    }
+
   </style>
 </head>
 <body>
-  <!-- Landing Page Content -->
   <div class="container" id="landing-content">
     <h1>The First P2P Marketplace Built on Farcaster</h1>
     <div class="subtext">
@@ -915,12 +1097,10 @@
       <div>Whether you're selling physical products, offering services, or just referring others — you earn through our trustless system.</div>
     </div>
     <hr>
-    <!-- Call to Action -->
     <button class="cta-btn" id="waitlist-btn">Join the Waitlist</button>
     <div id="waitlist-success" style="display:none; text-align:center; color:var(--primary-dark); font-weight:bold; margin-bottom:18px;">
       🎉 You’ve joined the waitlist!
     </div>
-    <!-- Add-on below CTA -->
     <div class="addon">
       <span>Already a seller or service provider?</span>
       <a id="open-registration">Register to Sell</a>
@@ -931,7 +1111,6 @@
     </div>
   </div>
 
-  <!-- Seller Registration Modal -->
   <div class="modal-bg" id="registration-modal">
     <div class="form-container">
       <button class="close-btn" id="close-registration" title="Close">&times;</button>
@@ -941,7 +1120,7 @@
         <input class="input" type="email" id="email" name="email" placeholder="your@email.com" required>
         <label>What do you want to sell?</label>
         <div class="radio-group">
-          <label><input type="radio" name="category" value="physical" required> Physical</label>
+          <label><input type="radio" name="category" value="goods" required> Goods</label>
           <label><input type="radio" name="category" value="digital"> Digital</label>
           <label><input type="radio" name="category" value="services"> Services</label>
         </div>
@@ -971,7 +1150,6 @@
     </div>
   </div>
 
-  <!-- Buyer Registration Modal -->
   <div class="modal-bg" id="buyer-modal">
     <div class="form-container">
       <button class="close-btn" id="close-buyer" title="Close">&times;</button>
@@ -981,181 +1159,42 @@
         <input class="input" type="email" id="buyer-email" name="buyer-email" placeholder="your@email.com" required>
         <button class="register-btn" type="submit" style="margin-top:10px;">Register as Buyer</button>
         <div id="buyer-success" style="display:none; text-align:center; color:var(--primary-dark); font-weight:bold; margin-top:14px;">
-          🎉 You’re registered as a buyer!
+          🎉 You’re registered as a buyer!<br>
+          <span id="buyer-countdown"></span>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Seller Dashboard (hidden by default) -->
-  <div class="dashboard" id="seller-dashboard" style="display:none;">
-    <h2>Welcome, Seller!</h2>
-    <div style="margin-bottom:18px; color:var(--primary);">What would you like to do?</div>
-    <div style="font-size:1.1rem; color:var(--muted); margin-bottom:30px;">
-      Use the buttons below to manage your offers, profile, and more.
-    </div>
-  </div>
+ 
 
-  <!-- Dashboard Sections -->
-  <div class="post-section dashboard-section" id="section-post">
-    <!-- Category Tabs -->
-    <div class="category-tabs" id="category-tabs">
+
+  <div class="dashboard-section" id="section-post">
+    <div class="category-tabs" id="seller-category-tabs">
       <button class="category-tab active" data-category="goods">Goods</button>
       <button class="category-tab" data-category="services">Services</button>
       <button class="category-tab" data-category="digital">Digital</button>
     </div>
-    <!-- Floating Action Button for Add Product -->
     <button class="fab" id="open-post-form" title="Add Product">
       <span class="material-icons">add</span>
     </button>
-    <!-- Product List -->
-    <div class="product-list-stacked" id="product-list">
-      <!-- Products will appear here -->
-    </div>
+    <div class="product-list-stacked" id="seller-product-list">
+      </div>
   </div>
+
+  <div class="dashboard-section" id="section-browse-products">
+    <div class="category-tabs" id="buyer-category-tabs">
+        <button class="category-tab active" data-category="all">All</button>
+        <button class="category-tab" data-category="goods">Goods</button>
+        <button class="category-tab" data-category="services">Services</button>
+        <button class="category-tab" data-category="digital">Digital</button>
+    </div>
+    <div class="buyer-product-list" id="all-products-list">
+      </div>
+  </div>
+
   <div class="dashboard-section" id="section-profile">
     <div class="profile-card">
-      <div class="profile-header">
-        <div class="profile-avatar-bg">
-          <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=anon" alt="Avatar" class="profile-avatar" id="profile-avatar">
-        </div>
-        <div class="profile-username" id="profile-username">@anonymous</div>
-        <div class="profile-wallet" id="profile-wallet" style="display:none;">
-          <span class="profile-wallet-icon material-icons">account_balance_wallet</span>
-          <span class="profile-wallet-text" id="wallet-address">UQC••••DEC</span>
-          <span class="profile-wallet-action material-icons" id="disconnect-wallet" title="Disconnect">logout</span>
-        </div>
-        <button class="connect-wallet-btn" id="connect-wallet-btn">Connect Farcaster Wallet</button>
-      </div>
-      <div class="profile-tabs">
-        <button class="profile-tab active">POINTS</button>
-        <button class="profile-tab">REWARDS</button>
-      </div>
-      <div class="profile-assets-title">Virtual assets</div>
-      <div class="profile-assets-sub">Trade for VT</div>
-      <div class="profile-assets-row">
-        <div class="profile-asset-card">
-          <img src="https://api.iconify.design/ph:egg.svg?color=%23000" class="profile-asset-icon" alt="Egg">
-          <div class="profile-asset-label">Vooi Tons</div>
-          <div class="profile-asset-value">504,174.32</div>
-        </div>
-        <div class="profile-asset-card">
-          <img src="https://api.iconify.design/ph:currency-circle-dollar.svg?color=%23000" class="profile-asset-icon" alt="USD">
-          <div class="profile-asset-label">Virtual USD</div>
-          <div class="profile-asset-value">$802,325.14</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="dashboard-section" id="section-leaderboard">
-    <h2>Leaderboard</h2>
-    <div style="color:var(--muted);">Leaderboard coming soon!</div>
-  </div>
-  <!-- Referral Section -->
-  <div class="dashboard-section" id="section-referral">
-    <div class="referral-bg">
-      <div class="referral-header">
-        <img src="https://api.iconify.design/ph:alien-bold.svg?color=%23000" alt="Invite" class="referral-icon">
-        <div class="referral-title">INVITE FRENS</div>
-      </div>
-      <div class="referral-balance-box">
-        <span class="referral-balance">0 VT</span>
-        <button class="referral-claim-btn" disabled>CLAIM</button>
-      </div>
-      <div class="referral-desc">
-        Score 5% from your buddies’ earned tokens + 1.25% from their referrals.
-      </div>
-      <button class="referral-invite-btn">
-        <span class="material-icons" style="font-size:1.2em;vertical-align:middle;">card_giftcard</span>
-        <span style="margin-left:8px;">INVITE A FREN</span>
-      </button>
-    </div>
-  </div>
-  <div class="dashboard-section" id="section-menu">
-    <h2>Menu</h2>
-    <div class="menu-list" style="display: flex; flex-direction: column; gap: 18px; margin-top: 18px;">
-      <button class="menu-item" id="change-email-btn">
-        <span class="material-icons" style="vertical-align:middle;">mail</span>
-        <span style="margin-left:10px;">Change Email</span>
-      </button>
-      <button class="menu-item" id="change-password-btn">
-        <span class="material-icons" style="vertical-align:middle;">lock</span>
-        <span style="margin-left:10px;">Change Password</span>
-      </button>
-      <button class="menu-item" id="theme-toggle">
-        <span class="material-icons" style="vertical-align:middle;">brightness_6</span>
-        <span style="margin-left:10px;">Switch Theme</span>
-      </button>
-      <button class="menu-item" id="support-btn">
-        <span class="material-icons" style="vertical-align:middle;">support_agent</span>
-        <span style="margin-left:10px;">Support</span>
-      </button>
-      <button class="menu-item" id="logout-btn">
-        <span class="material-icons" style="vertical-align:middle;">logout</span>
-        <span style="margin-left:10px;">Logout</span>
-      </button>
-      <div style="text-align:center; color:#aaa; font-size:0.95rem; margin-top:10px;">
-        App version 1.0.0
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Post Product Form -->
-  <div class="modal-form-bg" id="post-form-modal">
-    <div class="modal-form">
-      <button class="close-btn" id="close-post-form" title="Close">&times;</button>
-      <form id="product-form">
-        <label for="product-image">Image</label>
-        <input type="file" id="product-image" accept="image/*" style="margin-bottom:10px;">
-        <img id="image-preview" class="image-preview" alt="Preview">
-        <label for="product-name">Product Name</label>
-        <input id="product-name" required maxlength="40" placeholder="e.g. Handmade Wallet">
-        <label for="product-desc">Description</label>
-        <textarea id="product-desc" rows="2" required maxlength="120" placeholder="Short description"></textarea>
-        <label for="product-price">Price ($KNOW)</label>
-        <input id="product-price" type="number" min="1" required placeholder="e.g. 50">
-        <label for="product-category">Category</label>
-        <select id="product-category" required>
-          <option value="">Select category</option>
-          <option value="goods">Goods</option>
-          <option value="services">Services</option>
-          <option value="digital">Digital</option>
-        </select>
-        <label for="product-location">Location</label>
-        <input id="product-location" required maxlength="40" placeholder="e.g. New York, NY">
-        <button type="submit" class="register-btn" style="margin-top:10px;">Post Product</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Bottom Navigation (hidden until dashboard) -->
-  <div class="bottom-nav" id="bottom-nav" style="display:none;">
-    <button class="nav-btn active" id="nav-post">
-      <span class="material-icons">add_box</span>
-      <span class="label">Post</span>
-    </button>
-    <button class="nav-btn" id="nav-profile">
-      <span class="material-icons">person</span>
-      <span class="label">Profile</span>
-    </button>
-    <button class="nav-btn" id="nav-leaderboard">
-      <span class="material-icons">emoji_events</span>
-      <span class="label">Leaderboard</span>
-    </button>
-    <button class="nav-btn" id="nav-referral">
-      <span class="material-icons">share</span>
-      <span class="label">Referral</span>
-    </button>
-    <button class="nav-btn" id="nav-menu">
-      <span class="material-icons">menu</span>
-      <span class="label">Menu</span>
-    </button>
-  </div>
-
-  <!-- Profile Overlay Section -->
-  <div id="profile-overlay" class="profile-overlay">
-    <div class="profile-card">
-      <!-- <button class="profile-close" id="close-profile">&times;</button> -->
       <div class="profile-header">
         <div class="profile-avatar-bg">
           <img src="https://api.dicebear.com/7.x/pixel-art/svg?seed=remarkablesam" alt="Avatar" class="profile-avatar" id="profile-avatar">
@@ -1188,17 +1227,130 @@
       </div>
     </div>
   </div>
+  <div class="dashboard-section" id="section-leaderboard">
+    <h2>Leaderboard</h2>
+    <div style="color:var(--muted);">Leaderboard coming soon!</div>
+  </div>
+  <div class="dashboard-section" id="section-referral">
+    <div class="referral-bg">
+      <div class="referral-header">
+        <img src="https://api.iconify.design/ph:alien-bold.svg?color=%23000" alt="Invite" class="referral-icon">
+        <div class="referral-title">INVITE FRENS</div>
+      </div>
+      <div class="referral-balance-box">
+        <span class="referral-balance">0 VT</span>
+        <button class="referral-claim-btn" disabled>CLAIM</button>
+      </div>
+      <div class="referral-desc">
+        Score 5% from your buddies’ earned tokens + 1.25% from their referrals.
+      </div>
+      <button class="referral-invite-btn">
+        <span class="material-icons" style="font-size:1.2em;vertical-align:middle;">card_giftcard</span>
+        <span style="margin-left:8px;">INVITE A FREN</span>
+      </button>
+    </div>
+  </div>
+  <div class="dashboard-section" id="section-menu">
+    <h2>Menu</h2>
+    <div class="menu-list" style="display: flex; flex-direction: column; gap: 18px; margin-top: 18px;">
+      <button class="menu-item" id="change-email-btn" data-action="change-email">
+        <span class="material-icons" style="vertical-align:middle;">mail</span>
+        <span style="margin-left:10px;">Change Email</span>
+      </button>
+      <button class="menu-item" id="view-products-btn" data-action="view-products">
+        <span class="material-icons" style="vertical-align:middle;">storefront</span>
+        <span style="margin-left:10px;">View Products (Buyer View)</span>
+      </button>
+      <button class="menu-item" id="theme-toggle" data-action="switch-theme">
+        <span class="material-icons" style="vertical-align:middle;">brightness_6</span>
+        <span style="margin-left:10px;">Switch Theme</span>
+      </button>
+      <button class="menu-item" id="support-btn" data-action="support">
+        <span class="material-icons" style="vertical-align:middle;">support_agent</span>
+        <span style="margin-left:10px;">Support</span>
+      </button>
+      <button class="menu-item" id="logout-btn" data-action="logout">
+        <span class="material-icons" style="vertical-align:middle;">logout</span>
+        <span style="margin-left:10px;">Logout</span>
+      </button>
+      <div style="text-align:center; color:#aaa; font-size:0.95rem; margin-top:10px;">
+        App version 1.0.0
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-form-bg" id="post-form-modal">
+    <div class="modal-form">
+      <button class="close-btn" id="close-post-form" title="Close">&times;</button>
+      <form id="product-form">
+        <label for="product-image">Image</label>
+        <input type="file" id="product-image" accept="image/*" style="margin-bottom:10px;">
+        <img id="image-preview" class="image-preview" alt="Preview">
+        <label for="product-name">Product Name</label>
+        <input id="product-name" required maxlength="40" placeholder="e.g. Handmade Wallet">
+        <label for="product-desc">Description</label>
+        <textarea id="product-desc" rows="2" required maxlength="120" placeholder="Short description"></textarea>
+        <label for="product-price">Price ($KNOW)</label>
+        <input id="product-price" type="number" min="1" required placeholder="e.g. 50">
+        <label for="product-category">Category</label>
+        <select id="product-category" required>
+          <option value="">Select category</option>
+          <option value="goods">Goods</option>
+          <option value="services">Services</option>
+          <option value="digital">Digital</option>
+        </select>
+        <label for="product-location">Location</label>
+        <input id="product-location" required maxlength="40" placeholder="e.g. New York, NY">
+        <button type="submit" class="register-btn" style="margin-top:10px;">Post Product</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-form-bg" id="product-detail-modal">
+    <div class="modal-form">
+      <button class="close-btn" id="close-product-detail" title="Close">&times;</button>
+      <img src="" alt="Product Image" class="product-detail-img" id="detail-product-image">
+      <div class="product-detail-title" id="detail-product-name"></div>
+      <div class="product-detail-price" id="detail-product-price"></div>
+      <div class="product-detail-desc" id="detail-product-desc"></div>
+      <div class="product-detail-meta" id="detail-product-meta"></div>
+      <button class="buy-now-btn">Buy Now</button>
+    </div>
+  </div>
+
+  <div class="bottom-nav" id="bottom-nav" style="display:none;">
+    </div>
 
   <script>
-    // Modal open/close logic
+    // Global state to manage user type
+    let currentUserType = null; // 'buyer', 'seller', or null
+
+    // All products posted by any seller
+    let allProducts = [];
+
+    // Pre-populate with some dummy products for buyer view
+    allProducts.push(
+        { name: "Running Shoes", desc: "Comfortable running shoes for all terrains.", price: "120", category: "goods", location: "New York, NY", image: "https://via.placeholder.com/150/EEEEEE/888888?text=Shoes" },
+        { name: "Modern Chair", desc: "Ergonomic design for your home office.", price: "210", category: "goods", location: "San Angeles, CA", image: "https://via.placeholder.com/150/EEEEEE/888888?text=Chair" },
+        { name: "Laptop Repair", desc: "Expert laptop repair services.", price: "80", category: "services", location: "San Francisco, CA", image: "https://via.placeholder.com/150/EEEEEE/888888?text=Repair" },
+        { name: "Hoodie", desc: "Cozy and stylish hoodie for everyday wear.", price: "50", category: "goods", location: "Austin, TX", image: "https://via.placeholder.com/150/EEEEEE/888888?text=Hoodie" },
+        { name: "Website Design", desc: "Custom website design for small businesses.", price: "500", category: "services", location: "Remote", image: "https://via.placeholder.com/150/EEEEEE/888888?text=WebDesign" },
+        { name: "E-book: Learn JS", desc: "Digital e-book to master JavaScript.", price: "25", category: "digital", location: "Online", image: "https://via.placeholder.com/150/EEEEEE/888888?text=Ebook" }
+    );
+
+    // Modal open/close logic for registration modals
     const openBtn = document.getElementById('open-registration');
-    const modal = document.getElementById('registration-modal');
-    const closeBtn = document.getElementById('close-registration');
-    openBtn.onclick = () => { modal.classList.add('active'); };
-    closeBtn.onclick = () => { modal.classList.remove('active'); };
+    const registrationModal = document.getElementById('registration-modal');
+    const closeRegistrationBtn = document.getElementById('close-registration');
+    openBtn.onclick = () => { registrationModal.classList.add('active'); };
+    closeRegistrationBtn.onclick = () => { registrationModal.classList.remove('active'); };
     window.onclick = (e) => {
-      if (e.target === modal) modal.classList.remove('active');
+      // Close modals if clicking outside of them
+      if (e.target === registrationModal) registrationModal.classList.remove('active');
       if (e.target === buyerModal) buyerModal.classList.remove('active');
+      if (e.target === postFormModal) postFormModal.classList.remove('active');
+      if (e.target === productDetailModal) productDetailModal.classList.remove('active');
+      // Profile is now a section, not an overlay, so it won't be closed by clicking outside itself.
     };
 
     // Waitlist success message logic
@@ -1215,51 +1367,132 @@
     const closeBuyerBtn = document.getElementById('close-buyer');
     const buyerForm = document.getElementById('buyer-form');
     const buyerSuccess = document.getElementById('buyer-success');
-    buyerBtn.onclick = function() {
-      buyerModal.classList.add('active');
-    };
-    closeBuyerBtn.onclick = function() {
-      buyerModal.classList.remove('active');
-      buyerForm.reset();
-      buyerSuccess.style.display = 'none';
-      buyerForm.querySelector('button[type="submit"]').style.display = '';
-    };
+    const buyerCountdown = document.getElementById('buyer-countdown');
+
+    buyerBtn.onclick = () => { buyerModal.classList.add('active'); };
+
     buyerForm.onsubmit = function(e) {
       e.preventDefault();
+      currentUserType = 'buyer';
       buyerForm.querySelector('button[type="submit"]').style.display = 'none';
       buyerSuccess.style.display = 'block';
+
+      let seconds = 3;
+      buyerCountdown.textContent = `Loading main page in ${seconds}...`;
+      const interval = setInterval(() => {
+        seconds--;
+        buyerCountdown.textContent = `Loading main page in ${seconds}...`;
+        if (seconds === 0) {
+          clearInterval(interval);
+          buyerModal.classList.remove('active');
+          buyerForm.reset();
+          buyerSuccess.style.display = 'none';
+          buyerForm.querySelector('button[type="submit"]').style.display = '';
+          showDashboard();
+        }
+      }, 1000);
     };
 
     // Seller registration logic
     const sellerForm = document.getElementById('seller-form');
     const landingContent = document.getElementById('landing-content');
-    const sellerDashboard = document.getElementById('seller-dashboard');
     const bottomNav = document.getElementById('bottom-nav');
+
     sellerForm.onsubmit = function(e) {
       e.preventDefault();
-      modal.classList.remove('active');
+      currentUserType = 'seller';
+      registrationModal.classList.remove('active');
       landingContent.style.display = 'none';
-      sellerDashboard.style.display = 'block';
-      bottomNav.style.display = 'flex';
-      showSection('post');
+      showDashboard();
     };
 
-    // Bottom nav logic
-    const navBtns = document.querySelectorAll('.nav-btn');
-    const dashboardSections = document.querySelectorAll('.dashboard-section');
+    // Function to show the correct dashboard section and top bar
+    function showSection(sectionId) {
+      const dashboardSections = document.querySelectorAll('.dashboard-section');
+      const topBars = document.querySelectorAll('.section-top-bar');
 
-    navBtns.forEach(btn => {
-      btn.onclick = function() {
-        navBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const section = btn.id.replace('nav-', '');
-        dashboardSections.forEach(sec => sec.classList.remove('active'));
-        const secEl = document.getElementById('section-' + section);
-        if (secEl) secEl.classList.add('active');
-      };
-    });
+      dashboardSections.forEach(sec => sec.classList.remove('active'));
+      topBars.forEach(bar => bar.style.display = 'none'); // Hide all top bars
 
-    // Show/hide Post Product modal form
+      document.getElementById('section-' + sectionId).classList.add('active');
+      document.getElementById('top-bar-' + sectionId).style.display = 'flex'; // Show relevant top bar
+
+      // Update active state of bottom nav buttons
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      const activeNavBtn = document.getElementById('nav-' + sectionId);
+      if (activeNavBtn) {
+        activeNavBtn.classList.add('active');
+      }
+
+      // If it's the browse products section, ensure products are rendered for the current category
+      if (sectionId === 'browse-products') {
+        const activeBuyerTab = document.querySelector('#buyer-category-tabs .category-tab.active');
+        const currentBuyerCategory = activeBuyerTab ? activeBuyerTab.dataset.category : 'all';
+        renderAllProducts(currentBuyerCategory);
+      }
+    }
+
+    // Function to show the correct dashboard based on user type
+    function showDashboard() {
+      landingContent.style.display = 'none';
+      bottomNav.style.display = 'flex';
+      bottomNav.innerHTML = ''; // Clear existing nav buttons
+
+      const commonNavButtons = [
+        { id: 'nav-profile', icon: 'person', label: 'Profile', section: 'profile' },
+        { id: 'nav-leaderboard', icon: 'emoji_events', label: 'Leaderboard', section: 'leaderboard' },
+        { id: 'nav-referral', icon: 'share', label: 'Referral', section: 'referral' },
+        { id: 'nav-menu', icon: 'menu', label: 'Menu', section: 'menu' },
+      ];
+
+      if (currentUserType === 'seller') {
+        const postButton = document.createElement('button');
+        postButton.className = 'nav-btn';
+        postButton.id = 'nav-post';
+        postButton.innerHTML = `<span class="material-icons">add_box</span><span class="label">Post</span>`;
+        bottomNav.appendChild(postButton);
+        postButton.addEventListener('click', () => showSection('post'));
+
+        commonNavButtons.forEach(btnInfo => {
+          const btn = createNavButton(btnInfo.id, btnInfo.icon, btnInfo.label, btnInfo.section);
+          bottomNav.appendChild(btn);
+        });
+        showSection('post');
+        document.getElementById('open-post-form').style.display = 'flex';
+        // Ensure seller's category tabs are shown, buyer's hidden
+        document.getElementById('seller-category-tabs').style.display = 'flex';
+        document.getElementById('buyer-category-tabs').style.display = 'none';
+
+      } else if (currentUserType === 'buyer') {
+        const browseButton = document.createElement('button');
+        browseButton.className = 'nav-btn';
+        browseButton.id = 'nav-browse-products';
+        browseButton.innerHTML = `<span class="material-icons">storefront</span><span class="label">Browse</span>`;
+        bottomNav.appendChild(browseButton);
+        browseButton.addEventListener('click', () => showSection('browse-products'));
+
+        commonNavButtons.forEach(btnInfo => {
+          const btn = createNavButton(btnInfo.id, btnInfo.icon, btnInfo.label, btnInfo.section);
+          bottomNav.appendChild(btn);
+        });
+        showSection('browse-products');
+        document.getElementById('open-post-form').style.display = 'none';
+        // Ensure buyer's category tabs are shown, seller's hidden
+        document.getElementById('seller-category-tabs').style.display = 'none';
+        document.getElementById('buyer-category-tabs').style.display = 'flex';
+      }
+    }
+
+    function createNavButton(id, icon, label, section) {
+      const btn = document.createElement('button');
+      btn.className = 'nav-btn';
+      btn.id = id;
+      btn.innerHTML = `<span class="material-icons">${icon}</span><span class="label">${label}</span>`;
+      btn.addEventListener('click', () => showSection(section));
+      return btn;
+    }
+
+    // Show/hide Post Product modal form (FAB)
     const openPostFormBtn = document.getElementById('open-post-form');
     const postFormModal = document.getElementById('post-form-modal');
     const closePostFormBtn = document.getElementById('close-post-form');
@@ -1301,17 +1534,18 @@
       }
     };
 
-    let products = []; // {name, desc, price, image, category, location}
+    // Seller's own products (for their "Post" section)
+    let sellerProducts = []; // This will hold products specific to the current "seller" user
 
-    // Category tab logic
-    const categoryTabs = document.querySelectorAll('.category-tab');
-    let currentCategory = 'goods';
-    categoryTabs.forEach(tab => {
+    // Category tab logic for seller's "Post" section
+    const sellerCategoryTabs = document.querySelectorAll('#seller-category-tabs .category-tab');
+    let currentSellerCategory = 'goods';
+    sellerCategoryTabs.forEach(tab => {
       tab.onclick = function() {
-        categoryTabs.forEach(t => t.classList.remove('active'));
+        sellerCategoryTabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-        currentCategory = tab.getAttribute('data-category');
-        renderProducts();
+        currentSellerCategory = tab.getAttribute('data-category');
+        renderSellerProducts(); // Render only seller's products based on category
       };
     });
 
@@ -1324,9 +1558,15 @@
       const category = document.getElementById('product-category').value;
       const location = document.getElementById('product-location').value.trim();
       const image = imagePreview.src && imagePreview.style.display !== 'none' ? imagePreview.src : '';
+
       if (name && desc && price && category && location) {
-        products.unshift({ name, desc, price, image, category, location });
-        renderProducts();
+        const newProduct = { name, desc, price, image, category, location };
+        sellerProducts.unshift(newProduct); // Add to seller's own products
+        allProducts.unshift(newProduct); // Add to global list of all products
+
+        renderSellerProducts(); // Update seller's view
+        renderAllProducts(currentBuyerCategory); // Update buyer's view (if active)
+
         productForm.reset();
         imagePreview.style.display = 'none';
         imagePreview.src = '';
@@ -1334,17 +1574,22 @@
       }
     };
 
-    // Render products in stacked card style, filtered by category
-    function renderProducts() {
-      const list = document.getElementById('product-list');
+    // Render products in stacked card style for **sellers** (their own products)
+    function renderSellerProducts() {
+      const list = document.getElementById('seller-product-list');
       list.innerHTML = '';
-      products
-        .filter(p => p.category === currentCategory)
-        .forEach((p, i) => {
+      const filteredSellerProducts = sellerProducts.filter(p => p.category === currentSellerCategory);
+
+      if (filteredSellerProducts.length === 0) {
+          list.innerHTML = '<div style="text-align: center; color: var(--muted); padding: 20px;">No products posted in this category.</div>';
+          return;
+      }
+
+      filteredSellerProducts.forEach((p, i) => {
           const card = document.createElement('div');
           card.className = 'product-card-stacked';
           card.innerHTML = `
-            <img src="${p.image || ''}" alt="Product Image">
+            <img src="${p.image || 'https://via.placeholder.com/80/EEEEEE/888888?text=No+Image'}" alt="Product Image">
             <div class="product-card-info">
               <div class="product-title">${p.name}</div>
               <div class="product-badges">
@@ -1352,37 +1597,118 @@
               </div>
               <div class="product-meta">$${p.price} <span class="product-location">${p.location}</span></div>
               <div class="product-actions">
-                <button class="edit-btn" style="background:#7c3aed;color:#fff;">Edit</button>
-                <button class="delete-btn" style="background:#fff;color:#ef4444;border:1.5px solid #ef4444;">Delete</button>
+                <button class="edit-btn" data-index="${i}">Edit</button>
+                <button class="delete-btn" data-index="${i}">Delete</button>
               </div>
             </div>
           `;
-          // Edit button (optional: implement edit logic)
           card.querySelector('.edit-btn').onclick = (e) => {
             e.stopPropagation();
-            alert('Edit feature coming soon!');
+            alert('Edit feature coming soon!'); // Implement edit logic here
           };
-          // Delete button
           card.querySelector('.delete-btn').onclick = (e) => {
             e.stopPropagation();
-            products.splice(products.indexOf(p), 1);
-            renderProducts();
+            const indexInFiltered = parseInt(e.target.dataset.index);
+            const productToDelete = filteredSellerProducts[indexInFiltered];
+
+            // Remove from seller's products array
+            sellerProducts = sellerProducts.filter(p => p !== productToDelete);
+
+            // Remove from allProducts array
+            allProducts = allProducts.filter(p => p !== productToDelete);
+
+            renderSellerProducts();
+            renderAllProducts(currentBuyerCategory); // Update buyer's view
           };
           list.appendChild(card);
+      });
+    }
+
+    // Category tab logic for buyer's "Browse Products" section
+    const buyerCategoryTabs = document.querySelectorAll('#buyer-category-tabs .category-tab');
+    let currentBuyerCategory = 'all'; // Default to 'all' for buyers
+    buyerCategoryTabs.forEach(tab => {
+      tab.onclick = function() {
+        buyerCategoryTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentBuyerCategory = tab.getAttribute('data-category');
+        renderAllProducts(currentBuyerCategory); // Render all products based on category
+      };
+    });
+
+    // Render products in stacked card style for **buyers** (all products)
+    const allProductsList = document.getElementById('all-products-list');
+    function renderAllProducts(categoryFilter = 'all') {
+        allProductsList.innerHTML = ''; // Clear current list
+
+        let productsToRender = allProducts;
+        if (categoryFilter !== 'all') {
+            productsToRender = allProducts.filter(p => p.category === categoryFilter);
+        }
+
+        if (productsToRender.length === 0) {
+            allProductsList.innerHTML = '<div style="text-align: center; color: var(--muted); padding: 20px;">No products available in this category yet.</div>';
+            return;
+        }
+
+        productsToRender.forEach((p, i) => {
+            const card = document.createElement('div');
+            card.className = 'buyer-product-card'; // Using this class for buyer styling
+            card.innerHTML = `
+                <img src="${p.image || 'https://via.placeholder.com/80/EEEEEE/888888?text=No+Image'}" alt="${p.name}">
+                <div class="buyer-product-card-content">
+                    <div class="product-title">${p.name}</div>
+                    <div class="product-badges">
+                      <span class="badge ${p.category}">${capitalize(p.category)}</span>
+                      </div>
+                    <div class="product-meta">$${p.price} <span class="product-location">${p.location}</span></div>
+                    <div class="product-actions">
+                        <button class="buy-now-btn" data-index="${i}">Buy Now</button>
+                        <button class="chat-seller-btn" data-index="${i}">Chat Seller</button>
+                    </div>
+                </div>
+            `;
+            // Add click listeners to buttons
+            card.querySelector('.buy-now-btn').onclick = (e) => {
+                e.stopPropagation(); // Prevent card click from firing
+                alert(`Buying ${p.name} for $${p.price}`);
+                // Implement actual buy logic here (e.g., open a checkout modal)
+            };
+            card.querySelector('.chat-seller-btn').onclick = (e) => {
+                e.stopPropagation(); // Prevent card click from firing
+                alert(`Initiating chat with seller for ${p.name}`);
+                // Implement chat functionality here
+            };
+            allProductsList.appendChild(card);
         });
     }
+
+
     function capitalize(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    // Show Post section by default after seller registers
-    function showSection(section) {
-      dashboardSections.forEach(sec => sec.classList.remove('active'));
-      document.getElementById('section-' + section).classList.add('active');
-      navBtns.forEach(b => b.classList.remove('active'));
-      document.getElementById('nav-' + section).classList.add('active');
-      sellerDashboard.style.display = 'none';
+    // Product Detail Modal for Buyers
+    const productDetailModal = document.getElementById('product-detail-modal');
+    const closeProductDetailBtn = document.getElementById('close-product-detail');
+    const detailProductImage = document.getElementById('detail-product-image');
+    const detailProductName = document.getElementById('detail-product-name');
+    const detailProductPrice = document.getElementById('detail-product-price');
+    const detailProductDesc = document.getElementById('detail-product-desc');
+    const detailProductMeta = document.getElementById('detail-product-meta');
+
+    function showProductDetail(product) {
+        detailProductImage.src = product.image || 'https://via.placeholder.com/250';
+        detailProductName.textContent = product.name;
+        detailProductPrice.textContent = `$${product.price} KNOW`;
+        detailProductDesc.textContent = product.desc;
+        detailProductMeta.innerHTML = `Category: <span class="badge ${product.category}">${capitalize(product.category)}</span> | Location: ${product.location}`;
+        productDetailModal.classList.add('active');
     }
+
+    closeProductDetailBtn.onclick = () => {
+        productDetailModal.classList.remove('active');
+    };
 
     // Menu items logic
     const menuItems = document.querySelectorAll('.menu-item');
@@ -1393,90 +1719,53 @@
           const newEmail = prompt('Enter your new email address:');
           if (newEmail && /\S+@\S+\.\S+/.test(newEmail)) {
             alert('Email changed to: ' + newEmail + ' (demo only)');
-            // Here you would send newEmail to your backend
           } else if (newEmail) {
             alert('Invalid email address.');
           }
-        } else if (action === 'change-password') {
-          const newPass = prompt('Enter your new password:');
-          if (newPass && newPass.length >= 6) {
-            alert('Password changed! (demo only)');
-            // Here you would send newPass to your backend
-          } else if (newPass) {
-            alert('Password must be at least 6 characters.');
-          }
+        } else if (action === 'view-products') { // NEW: View Products for sellers
+            if (currentUserType === 'seller') {
+                currentUserType = 'buyer'; // Temporarily switch to buyer view
+                showDashboard(); // Re-render dashboard for buyer
+                // Ensure the "Browse Products" tab is active in the buyer view
+                const browseBtn = document.getElementById('nav-browse-products');
+                if (browseBtn) {
+                  browseBtn.click(); // Programmatically click to activate
+                }
+            } else {
+                alert('You are already viewing products!');
+            }
         } else if (action === 'switch-theme') {
-          const currentTheme = document.documentElement.getAttribute('data-theme');
-          document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+          document.body.classList.toggle('dark-theme');
         } else if (action === 'support') {
           window.location.href = 'mailto:support@knowempire.com?subject=Support%20Request';
         } else if (action === 'logout') {
-          // For demo: reloads the page. In production, clear auth/session.
           alert('Logging out...');
+          currentUserType = null;
+          landingContent.style.display = 'block';
+          bottomNav.style.display = 'none';
+          document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
+          document.querySelectorAll('.section-top-bar').forEach(bar => bar.style.display = 'none'); // Hide all top bars
           window.location.reload();
         }
-      };
+      }
     });
-
-    // Dark mode toggle
-    document.getElementById('theme-toggle').onclick = function() {
-      document.body.classList.toggle('dark-theme');
-    };
-
-    // Profile overlay logic
-    const profileOverlay = document.getElementById('profile-overlay');
-    // const closeProfileBtn = document.getElementById('close-profile');
-    const walletAction = document.querySelector('.profile-wallet-action');
-
-    walletAction.onclick = function() {
-      // For demo: toggle profile overlay
-      const isOpen = profileOverlay.classList.contains('active');
-      profileOverlay.classList.toggle('active', !isOpen);
-      if (!isOpen) {
-        // Close any open modals
-        modal.classList.remove('active');
-        buyerModal.classList.remove('active');
-        postFormModal.classList.remove('active');
-      }
-    };
-
-    closeProfileBtn.onclick = function() {
-      profileOverlay.classList.remove('active');
-    };
-
-    // Close profile overlay when clicking outside of it
-    window.onclick = function(event) {
-      if (event.target === profileOverlay) {
-        profileOverlay.classList.remove('active');
-      }
-    };
-
-    // Show profile overlay when Profile tab is clicked
-    document.getElementById('nav-profile').onclick = function() {
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
-      document.getElementById('profile-overlay').classList.add('active');
-    };
-    // Close profile overlay
-    document.getElementById('close-profile').onclick = function() {
-      document.getElementById('profile-overlay').classList.remove('active');
-      // Optionally, show the last active dashboard section again
-    };
 
     // Simulate Farcaster wallet connection
     document.getElementById('connect-wallet-btn').onclick = function() {
-      // Simulate getting user data from Farcaster
-      const farcasterId = '@remarkablesam';
-      const walletAddress = '0xUQC...DEC';
-      const avatarUrl = 'https://api.dicebear.com/7.x/pixel-art/svg?seed=remarkablesam';
+      console.log('Attempting to connect Farcaster wallet...');
+      setTimeout(() => {
+        const farcasterId = '@remarkablesam';
+        const walletAddress = '0xUQC...DEC';
+        const avatarUrl = 'https://api.dicebear.com/7.x/pixel-art/svg?seed=remarkablesam';
 
-      document.getElementById('profile-username').textContent = farcasterId;
-      document.getElementById('wallet-address').textContent = walletAddress;
-      document.getElementById('profile-avatar').src = avatarUrl;
+        document.getElementById('profile-username').textContent = farcasterId;
+        document.getElementById('wallet-address').textContent = walletAddress;
+        document.getElementById('profile-avatar').src = avatarUrl;
 
-      document.getElementById('profile-wallet').style.display = 'flex';
-      this.style.display = 'none';
+        document.getElementById('profile-wallet').style.display = 'flex';
+        this.style.display = 'none';
+        alert('Farcaster Wallet Connected!');
+      }, 1000);
     };
 
     document.getElementById('disconnect-wallet').onclick = function() {
@@ -1485,16 +1774,20 @@
       document.getElementById('profile-avatar').src = 'https://api.dicebear.com/7.x/pixel-art/svg?seed=anon';
       document.getElementById('profile-wallet').style.display = 'none';
       document.getElementById('connect-wallet-btn').style.display = 'inline-block';
+      alert('Farcaster Wallet Disconnected!');
     };
 
-    // Hide profile overlay when any nav button except profile is clicked
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        if (btn.id !== 'nav-profile') {
-          document.getElementById('profile-overlay').classList.remove('active');
-        }
-      });
-    });
+    // Initial rendering of all products for the buyer view
+    renderAllProducts(currentBuyerCategory);
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+ <!--good  -->
